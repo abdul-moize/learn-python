@@ -23,3 +23,8 @@ def test_re():
     # When only simple capabilities are needed, string methods are preferred because they are
     # easier to read and debug:
     assert 'tea for too'.replace('too', 'two') == 'tea for two'
+    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    emails = ['ankitrai326@gmail.com', 'my.ownsite@ourearth.org', 'ankitrai326.com']
+    assert re.match(regex, emails[0])
+    assert re.match(regex, emails[1])
+    assert not re.match(regex, emails[2])
