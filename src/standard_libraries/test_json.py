@@ -34,5 +34,8 @@ def test_json():
     # To encode a data structure to JSON, use the "dumps" method. This method takes an object and
     # returns a String:
     encoded_person_string = json.dumps(person_dictionary)
-
     assert encoded_person_string == json_string
+    my_json_array = [{'name': 'amk', 'marks': 50}, {'name': 'hamza', 'marks': 30}]
+    assert my_json_array[0]['marks'] == 50
+    # notice the double quotes inside the json object
+    assert json.dumps(my_json_array) == '[{"name": "amk", "marks": 50}, {"name": "hamza", "marks": 30}]'
