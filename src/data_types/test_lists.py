@@ -85,7 +85,7 @@ def test_list_type():
 def test_list_methods():
     """Test list methods."""
 
-    fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+    fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'grape']
 
     # list.append(x)
     # Add an item to the end of the list.
