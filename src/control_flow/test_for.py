@@ -25,7 +25,17 @@ def test_for_statement():
     # "window" length is 6
     # "defenestrate" length is 12
     assert words_length == (3 + 6 + 12)
+    words_length = 0
+    for i in range(len(words)):
+        words_length += len(words[i])
+    assert words_length == (3 + 6 + 12)
 
+    names = ['amk', 'hamza', 'ali']
+    last_names = ['arif', 'khizar', 'fareed']
+    combined_names = []
+    for i, j in zip(names, last_names):
+        combined_names.append(i + ' ' + j)
+    assert combined_names == ['amk arif', 'hamza khizar', 'ali fareed']
     # If you need to modify the sequence you are iterating over while inside the loop
     # (for example to duplicate selected items), it is recommended that you first make a copy.
     # Iterating over a sequence does not implicitly make a copy. The slice notation makes this
@@ -38,6 +48,7 @@ def test_for_statement():
     # inserting defenestrate over and over again.
 
     assert words == ['defenestrate', 'cat', 'window', 'defenestrate']
+    words = ['cat', 'window', 'defenestrate']
 
     # If you do need to iterate over a sequence of numbers, the built-in function range() comes in
     # handy. It generates arithmetic progressions:
@@ -48,6 +59,12 @@ def test_for_statement():
 
     assert iterated_numbers == [0, 1, 2, 3, 4]
 
+    inds = []
+    vals = []
+    for ind, val in enumerate(range(5)):
+        inds.append(ind)
+        vals.append(val)
+    assert inds == vals
     # To iterate over the indices of a sequence, you can combine range() and len() as follows:
     words = ['Mary', 'had', 'a', 'little', 'lamb']
     concatenated_string = ''
@@ -57,6 +74,11 @@ def test_for_statement():
         concatenated_string += words[word_index] + ' '
 
     assert concatenated_string == 'Mary had a little lamb '
+    numbers = [5, 4, 3, 2, 1]
+    reverse_numbers = []
+    for i in range(len(numbers) - 1, -1, -1):
+        reverse_numbers.append(numbers[i])
+    assert reverse_numbers == [1, 2, 3, 4, 5]
 
     # Or simply use enumerate().
     concatenated_string = ''
@@ -104,6 +126,12 @@ def test_for_statement():
         'What is your quest?  It is the holy grail.',
         'What is your favorite color?  It is blue.',
     ]
+    name = ['amk', 'ali', 'hamza']
+    marks = [100, 9, 10]
+    result = {}
+    for i, j in zip(name, marks):
+        result[i] = j
+    assert result == {'amk': 100, 'ali': 9, 'hamza': 10}
 
 
 def test_range_function():
@@ -132,3 +160,4 @@ def test_range_function():
     assert list(range(5, 10)) == [5, 6, 7, 8, 9]
     assert list(range(0, 10, 3)) == [0, 3, 6, 9]
     assert list(range(-10, -100, -30)) == [-10, -40, -70]
+    assert list(range(5, 0, -1)) == [5, 4, 3, 2, 1]

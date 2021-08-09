@@ -10,6 +10,7 @@ of the same code, inheritance allows a derived class to reuse the same code and 
 # pylint: disable=too-few-public-methods
 class Person:
     """Example of the base class"""
+
     def __init__(self, name):
         self.name = name
 
@@ -37,6 +38,7 @@ class Employee(Person):
     clients as well. (Note that this only works if the base class is accessible as BaseClassName
     in the global scope.)
     """
+
     def __init__(self, name, staff_id):
         Person.__init__(self, name)
         # You may also use super() here in order to avoid explicit using of parent class name:
@@ -57,7 +59,6 @@ def test_inheritance():
     # reference is valid if this yields a function object.
     person = Person('Bill')
     employee = Employee('John', 'A23')
-
     assert person.get_name() == 'Bill'
     assert employee.get_name() == 'John'
     assert employee.get_full_id() == 'John, A23'
@@ -73,9 +74,38 @@ def test_inheritance():
 
     assert isinstance(employee, Employee)
     assert not isinstance(person, Employee)
-
+    assert Person.get_name(employee) == 'John'
     assert isinstance(person, Person)
     assert isinstance(employee, Person)
 
     assert issubclass(Employee, Person)
     assert not issubclass(Person, Employee)
+
+    class Student:
+        def __init__(self, name):
+            self.name = name
+
+        def get_type(self):
+            return 'student'
+
+    class BachelorStudent(Student):
+        def __init__(self, name):
+            super().__init__(name)
+
+        def get_type(self):
+            return 'bachelor'
+
+    class MasterStudent(Student):
+        def __init__(self, name):
+            super().__init__(name)
+
+        def get_type(self):
+            return 'master'
+
+    student = Student('amk')
+    bachelor = BachelorStudent('ali')
+    master = MasterStudent('hamza')
+    assert student.get_type() == 'student'
+    assert bachelor.get_type() == 'bachelor'
+    assert master.get_type() == 'master'
+    assert Student.get_type(bachelor) == Student.get_type(master) == 'student'

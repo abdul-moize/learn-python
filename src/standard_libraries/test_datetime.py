@@ -7,7 +7,7 @@ ways. While date and time arithmetic is supported, the focus of the implementati
 member extraction for output formatting and manipulation. The module also supports objects that
 are timezone aware.
 """
-
+import time
 from datetime import date
 
 
@@ -32,3 +32,5 @@ def test_datetime():
     age = fake_now - birthday
 
     assert age.days == 19752
+    current_year = int(1970 + time.time() / (60 * 60 * 24 * 365))
+    assert current_year == 2021

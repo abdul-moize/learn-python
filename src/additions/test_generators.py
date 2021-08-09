@@ -32,8 +32,29 @@ def lottery():
 
 def test_generators():
     """Yield statement"""
-    for number_index, random_number in enumerate(lottery()):
+    xyz = enumerate(lottery())
+    for number_index, random_number in xyz:
         if number_index < 3:
             assert 0 <= random_number <= 10
         else:
             assert 10 <= random_number <= 20
+
+    def my_gen():
+        n = 1
+        yield n
+        n += 1
+        yield n
+        n += 1
+        yield n
+
+    # manually access
+    numbers = my_gen()
+    assert next(numbers) == 1
+    assert next(numbers) == 2
+    assert next(numbers) == 3
+
+    # loop access
+    count = 1
+    for i in my_gen():
+        assert i == count
+        count += 1

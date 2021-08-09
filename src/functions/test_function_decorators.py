@@ -25,6 +25,7 @@ def test_function_decorators():
     def decorate_with_p(func):
         def function_wrapper(name):
             return "<p>{0}</p>".format(func(name))
+
         return function_wrapper
 
     # Now, let's call our decorator and pass the function we want decorate to it.
@@ -52,6 +53,7 @@ def test_function_decorators():
     def decorate_with_div(func):
         def function_wrapper(text):
             return "<div>{0}</div>".format(func(text))
+
         return function_wrapper
 
     # With the basic approach, decorating get_text would be along the lines of
@@ -80,7 +82,9 @@ def test_function_decorators():
         def tags_decorator(func):
             def func_wrapper(name):
                 return "<{0}>{1}</{0}>".format(tag_name, func(name))
+
             return func_wrapper
+
         return tags_decorator
 
     @tags('div')
@@ -89,3 +93,18 @@ def test_function_decorators():
         return "Hello, {0}!".format(name)
 
     assert greeting_with_tags('John') == '<div><p>Hello, John!</p></div>'
+
+    def wrap(tag):
+        def decorator(func):
+            def wrapper(*name):
+                return F"<{tag}>{func(*name)}</{tag}>"
+
+            return wrapper
+
+        return decorator
+
+    @wrap('amk')
+    def wish(occasion, name):
+        return F"happy {occasion}, {name}"
+
+    assert wish('birthday', 'moize') == "<amk>happy birthday, moize</amk>"

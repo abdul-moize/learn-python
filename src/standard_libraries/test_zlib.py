@@ -21,3 +21,6 @@ def test_zlib():
     assert zlib_decompressed_string == b'witch which has which witches wrist watch'
 
     assert zlib.crc32(string) == 226805979
+    string = 'mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'.encode()
+    string1 = 'mmmmmmmmmmmmmmmmm'.encode()
+    assert len(zlib.compress(string)) == len(zlib.compress(string1)) + 1
