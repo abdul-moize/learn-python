@@ -9,9 +9,9 @@ specific locations in the file, much like flipping to a page in a book.
 
 def test_file_methods():
     """Methods of File Objects"""
-
-    multi_line_file = open('src/files/multi_line_file.txt', 'r')
-    binary_file = open('src/files/binary_file', 'r')
+    path = 'src/files/'
+    multi_line_file = open(path + 'multi_line_file.txt', 'r')
+    binary_file = open(path + 'binary_file', 'r')
 
     # To read a file’s contents, call f.read(size), which reads some quantity of data and returns
     # it as a string (in text mode) or bytes object (in binary mode). size is an optional numeric
@@ -48,3 +48,18 @@ def test_file_methods():
 
     multi_line_file.close()
     binary_file.close()
+    with open(path + 'symmetric.txt', 'w') as f:
+        for i in range(10):
+            f.write('line ' + str(i) + '\n')
+
+    # every line has is like 'line 0\n' 4+1+1+1 = 7 bytes/characters
+    f = open(path + 'symmetric.txt', 'r')
+    f.seek(7 * 2)
+    assert f.readline() == 'line 2\n'
+    f.seek(7 * 0)
+    assert f.readline() == 'line 0\n'
+    f.seek(7 * 8)
+    assert f.readline() == 'line 8\n'
+    f.seek(7 * 5)
+    assert f.readline() == 'line 5\n'
+

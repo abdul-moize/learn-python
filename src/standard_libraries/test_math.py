@@ -51,6 +51,7 @@ def test_random():
     values = range(1, 10)
     assert values.__contains__(random_integer)
 
+
 def test_statistics():
     """Statistics.
 

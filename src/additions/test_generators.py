@@ -52,7 +52,7 @@ def test_generators():
     assert next(numbers) == 2
     assert next(numbers) == 3
 
-    #loop access
+    # loop access
     count = 1
     for i in my_gen():
         assert i == count
