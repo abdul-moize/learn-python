@@ -50,6 +50,9 @@ def test_random():
     random_integer = int(random.randint(1, 10))
     values = range(1, 11)
     assert values.__contains__(random_integer)
+    a = 1
+    b = 2
+    assert a + b == 3
 
 
 def test_statistics():
