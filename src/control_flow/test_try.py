@@ -13,9 +13,7 @@ The "finally" block lets you execute code, regardless of the result of the try- 
 """
 
 
-def test_try():
-    """TRY statement"""
-
+def handle_error():
     # The try block will generate an error, because x is not defined:
     exception_has_been_caught = False
 
@@ -27,8 +25,8 @@ def test_try():
 
     assert exception_has_been_caught
 
-    # You can define as many exception blocks as you want, e.g. if you want to execute a special
-    # block of code for a special kind of error:
+
+def handle_error2():
     exception_message = ''
 
     try:
@@ -39,10 +37,9 @@ def test_try():
 
     assert exception_message == 'Variable is not defined'
 
-    # You can use the else keyword to define a block of code to be executed
-    # if no errors were raised.
+
+def handle_name_error():
     message = ''
-    # pylint: disable=broad-except
     try:
         message += 'Success.'
     except NameError:
@@ -52,6 +49,18 @@ def test_try():
 
     assert message == 'Success.Nothing went wrong.'
 
+
+def test_try():
+    """TRY statement"""
+    # You can define as many exception blocks as you want, e.g. if you want to execute a special
+    # block of code for a special kind of error:
+    handle_error()
+    handle_error2()
+    handle_name_error()
+    # You can use the else keyword to define a block of code to be executed
+    # if no errors were raised.
+    message = ''
+    # pylint: disable=broad-except
     # The finally block, if specified, will be executed regardless if the try block raises an
     # error or not.
     message = ''
@@ -64,3 +73,9 @@ def test_try():
         message += 'The "try except" is finished.'
 
     assert message == 'Something went wrong.The "try except" is finished.'
+    numbers = [1, 2, 3, 4, 5, 6]
+    try:
+        print(numbers[100])
+    except IndexError:
+        message = "index out of range"
+    assert message == "index out of range"

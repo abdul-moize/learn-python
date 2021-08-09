@@ -23,21 +23,26 @@ def test_string_type():
     assert name_1 == name_2
     assert isinstance(name_1, str)
     assert isinstance(name_2, str)
+    my_string = "abcdef"
+    assert isinstance(my_string[0], str)
 
     # \ can be used to escape quotes.
     # use \' to escape the single quote or use double quotes instead.
     single_quote_string = 'doesn\'t'
     double_quote_string = "doesn't"
-
+    sqs = 'he said,"my name is ali".'
+    dqs = "he said,\"my name is ali\"."
+    assert sqs == dqs
     assert single_quote_string == double_quote_string
 
     # \n means newline.
     multiline_string = 'First line.\nSecond line.'
+    tab_string = 'before tab\tafter tab'
+    assert tab_string == 'before tab' + '\t' + 'after tab'
     # Without print(), \n is included in the output.
     # But with print(), \n produces a new line.
     assert multiline_string == 'First line.\nSecond line.'
 
-    # Strings can be indexed, with the first character having index 0.
     # There is no separate character type; a character is simply a string
     # of size one. Note that since -0 is the same as 0, negative indices
     # start from -1.
@@ -103,7 +108,8 @@ def test_string_type():
     # The built-in function len() returns the length of a string:
     characters = 'supercalifragilisticexpialidocious'
     assert len(characters) == 34
-
+    my_string = 'my name is abdul moize arif'
+    assert my_string[17:22] == 'moize'
     # String literals can span multiple lines. One way is using triple-quotes: """..."""
     # or '''...'''. End of lines are automatically included in the string, but it’s possible
     # to prevent this by adding a \ at the end of the line. The following example:
@@ -124,7 +130,7 @@ def test_string_operators():
     Strings can be concatenated (glued together) with the + operator,
     and repeated with *: 3 times 'un', followed by 'ium'
     """
-
+    assert 2 * 'mo' * 2 == 'momomomo'
     assert 3 * 'un' + 'ium' == 'unununium'
 
     # 'Py' 'thon'
@@ -133,14 +139,15 @@ def test_string_operators():
 
     # This feature is particularly useful when you want to break long strings:
     text = (
-        'Put several strings within parentheses '
-        'to have them joined together.'
+            python +
+            'to have them joined together.'
     )
-    assert text == 'Put several strings within parentheses to have them joined together.'
+    assert text == 'Pythonto have them joined together.'
 
     # If you want to concatenate variables or a variable and a literal, use +:
     prefix = 'Py'
     assert prefix + 'thon' == 'Python'
+    assert python + '\b' == 'Python\b'
 
 
 def test_string_methods():
@@ -198,6 +205,8 @@ def test_string_methods():
     assert '1234'.isdecimal()
     assert not 'a21453'.isdecimal()
 
+    assert ' '.join(['one string', 'two string']) == 'one string two string'
+
 
 def test_string_formatting():
     """String formatting.
@@ -218,7 +227,7 @@ def test_string_formatting():
     # mark where a variable will be substituted and can provide detailed formatting directives,
     # but you’ll also need to provide the information to be formatted.
     yes_votes = 42_572_654  # equivalent of 42572654
-    no_votes = 43_132_495   # equivalent of 43132495
+    no_votes = 43_132_495  # equivalent of 43132495
     percentage = yes_votes / (yes_votes + no_votes)
 
     assert '{:-9} YES votes  {:2.2%}'.format(yes_votes, percentage) == ' 42572654 YES votes  49.67%'
@@ -239,7 +248,8 @@ def test_string_formatting():
 
     assert str(greeting) == 'Hello, world.'
     assert repr(greeting) == "'Hello, world.'"
-    assert str(1/7) == '0.14285714285714285'
+    assert str(1 / 7) == '0.14285714285714285'
+    assert repr(1 / 7) == '0.14285714285714285'
 
     # The argument to repr() may be any Python object:
     assert repr((first_num, second_num, ('spam', 'eggs'))) == "(32.5, 40000, ('spam', 'eggs'))"

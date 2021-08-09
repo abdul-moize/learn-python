@@ -64,6 +64,8 @@ from fibonacci_module import fibonacci_at_position as fibonacci_at_position_rena
 # - PYTHONPATH (a list of directory names, with the same syntax as the shell variable PATH).
 # - The installation-dependent default.
 
+import some_module as M
+
 
 def test_modules():
     """Modules"""
@@ -72,7 +74,6 @@ def test_modules():
     assert fibonacci_at_position(7) == 13
     assert fibonacci_module_renamed.fibonacci_at_position(7) == 13
     assert fibonacci_at_position_renamed(7) == 13
-
     assert fibonacci_module.fibonacci_smaller_than(100) == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
     assert fibonacci_smaller_than(100) == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
     assert fibonacci_module_renamed.fibonacci_smaller_than(10) == [0, 1, 1, 2, 3, 5, 8]
@@ -95,3 +96,5 @@ def test_modules():
         'fibonacci_at_position',
         'fibonacci_smaller_than',
     ]
+    assert M.important_information['imp_attribute'] == 'something_important'
+    assert M.greet('amk') == 'Hello, amk'
