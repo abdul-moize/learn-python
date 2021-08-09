@@ -9,6 +9,7 @@ Python’s for statement iterates over the items of any sequence (a list or a st
 order that they appear in the sequence. For example (no pun intended):
 """
 
+
 def get_result():
     name = ['amk', 'ali', 'hamza']
     marks = [100, 9, 10]

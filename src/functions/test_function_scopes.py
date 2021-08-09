@@ -117,7 +117,7 @@ def test_variable_scopes():
 
     def global_access():
         global_variable = "GV!"
-        assert global_variable =='GV!'
+        assert global_variable == 'GV!'
 
     global_access()
     assert global_variable == "GV"
