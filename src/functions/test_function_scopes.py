@@ -117,6 +117,7 @@ def test_variable_scopes():
 
     def global_access():
         global_variable = "GV!"
+        assert global_variable =='GV!'
 
     global_access()
     assert global_variable == "GV"
@@ -131,6 +132,7 @@ def test_variable_scopes():
     def local_change():
         nonlocal outer_variable
         global_variable = "New GV"
+        assert global_variable == "New GV"
 
     local_change()
     assert global_variable == "Changed GV"

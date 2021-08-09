@@ -9,8 +9,62 @@ Python’s for statement iterates over the items of any sequence (a list or a st
 order that they appear in the sequence. For example (no pun intended):
 """
 
+def get_result():
+    name = ['amk', 'ali', 'hamza']
+    marks = [100, 9, 10]
+    result = {}
+    for i, j in zip(name, marks):
+        result[i] = j
+    return result
 
+
+def get_combinations():
+    questions = ['name', 'quest', 'favorite color']
+    answers = ['lancelot', 'the holy grail', 'blue']
+    combinations = []
+    for question, answer in zip(questions, answers):
+        combinations.append('What is your {0}?  It is {1}.'.format(question, answer))
+    return combinations
 # pylint: disable=too-many-locals
+
+
+def get_inds_vals():
+    inds = []
+    vals = []
+    for ind, val in enumerate(range(5)):
+        inds.append(ind)
+        vals.append(val)
+    return inds, vals
+
+
+def get_knights():
+    kn = []
+    kp = []
+    knights = {'gallahad': 'the pure', 'robin': 'the brave'}
+    for key, value in knights.items():
+        kn.append(key)
+        kp.append(value)
+    return kn, kp
+
+
+def get_indices():
+    indices = []
+    values = []
+    for index, value in enumerate(['tic', 'tac', 'toe']):
+        indices.append(index)
+        values.append(value)
+    return indices, values
+
+
+def get_combined_names():
+    names = ['amk', 'hamza', 'ali']
+    last_names = ['arif', 'khizar', 'fareed']
+    combined_names = []
+    for i, j in zip(names, last_names):
+        combined_names.append(i + ' ' + j)
+    return combined_names
+
+
 def test_for_statement():
     """FOR statement"""
 
@@ -29,12 +83,7 @@ def test_for_statement():
     for i in range(len(words)):
         words_length += len(words[i])
     assert words_length == (3 + 6 + 12)
-
-    names = ['amk', 'hamza', 'ali']
-    last_names = ['arif', 'khizar', 'fareed']
-    combined_names = []
-    for i, j in zip(names, last_names):
-        combined_names.append(i + ' ' + j)
+    combined_names = get_combined_names()
     assert combined_names == ['amk arif', 'hamza khizar', 'ali fareed']
     # If you need to modify the sequence you are iterating over while inside the loop
     # (for example to duplicate selected items), it is recommended that you first make a copy.
@@ -59,11 +108,7 @@ def test_for_statement():
 
     assert iterated_numbers == [0, 1, 2, 3, 4]
 
-    inds = []
-    vals = []
-    for ind, val in enumerate(range(5)):
-        inds.append(ind)
-        vals.append(val)
+    inds, vals = get_inds_vals()
     assert inds == vals
     # To iterate over the indices of a sequence, you can combine range() and len() as follows:
     words = ['Mary', 'had', 'a', 'little', 'lamb']
@@ -90,47 +135,26 @@ def test_for_statement():
 
     # When looping through dictionaries, the key and corresponding value can be retrieved at the
     # same time using the items() method.
-    knights_names = []
-    knights_properties = []
-
-    knights = {'gallahad': 'the pure', 'robin': 'the brave'}
-    for key, value in knights.items():
-        knights_names.append(key)
-        knights_properties.append(value)
-
+    knights_names, knights_properties = get_knights()
     assert knights_names == ['gallahad', 'robin']
     assert knights_properties == ['the pure', 'the brave']
 
     # When looping through a sequence, the position index and corresponding value can be retrieved
     # at the same time using the enumerate() function
-    indices = []
-    values = []
-    for index, value in enumerate(['tic', 'tac', 'toe']):
-        indices.append(index)
-        values.append(value)
-
+    indices, values = get_indices()
     assert indices == [0, 1, 2]
     assert values == ['tic', 'tac', 'toe']
 
     # To loop over two or more sequences at the same time, the entries can be paired with
     # the zip() function.
-    questions = ['name', 'quest', 'favorite color']
-    answers = ['lancelot', 'the holy grail', 'blue']
-    combinations = []
-
-    for question, answer in zip(questions, answers):
-        combinations.append('What is your {0}?  It is {1}.'.format(question, answer))
+    combinations = get_combinations()
 
     assert combinations == [
         'What is your name?  It is lancelot.',
         'What is your quest?  It is the holy grail.',
         'What is your favorite color?  It is blue.',
     ]
-    name = ['amk', 'ali', 'hamza']
-    marks = [100, 9, 10]
-    result = {}
-    for i, j in zip(name, marks):
-        result[i] = j
+    result = get_result()
     assert result == {'amk': 100, 'ali': 9, 'hamza': 10}
 
 
