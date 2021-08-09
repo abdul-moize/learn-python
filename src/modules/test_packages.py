@@ -33,7 +33,8 @@ module named sys:
 """
 
 # Users of the package can import individual modules from the package, for example.
-from sound_package.formats import wav, aif
+from sound_package.formats.wav import wav_read
+from sound_package.formats.aif import aif_read
 import sound_package.formats
 # An alternative way of importing the submodule is:
 
@@ -61,6 +62,6 @@ def test_packages():
     assert echo.echo_function() == 'Do echo effect'
     assert echo_function() == 'Do echo effect'
     assert sound_package.formats.wav.__doc__ == "WAV file support."
-    assert sound_package.formats.wav.wav_read.__doc__ == 'WAV file reading function mock'
-    assert sound_package.formats.aif.aif_read() == 'Read from AIF file'
-    assert sound_package.formats.wav.wav_read() == 'Read from WAV file'
+    assert wav_read.__doc__ == 'WAV file reading function mock'
+    assert aif_read() == 'Read from AIF file'
+    assert wav_read() == 'Read from WAV file'
