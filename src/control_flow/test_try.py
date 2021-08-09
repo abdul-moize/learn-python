@@ -25,6 +25,7 @@ def handle_error():
 
     assert exception_has_been_caught
 
+
 def handle_error2():
     exception_message = ''
 
