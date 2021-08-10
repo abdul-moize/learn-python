@@ -73,9 +73,9 @@ def test_files_open():
         read_data = file.read()
 
         assert read_data == (
-            'first line\n'
-            'second line\n'
-            'third line'
+            b'first line\n'
+            b'second line\n'
+            b'third line'
         )
 
     assert file.closed
