@@ -39,3 +39,10 @@ def test_json():
     assert my_json_array[0]['marks'] == 50
     # notice the double quotes inside the json object
     assert json.dumps(my_json_array) == '[{"name": "amk", "marks": 50}, {"name": "hamza", "marks": 30}]'
+    new_json = json.loads('{ '
+                          '"name": "moize", '
+                          '"Age": 23, '
+                          '"grades": ['
+                          '{ "title": "Science", "total": 100, "passing": 80, "obtained": 85 },'
+                          '{ "title": "Math", "total": 100, "passing": 80, "obtained":70 }]} ')
+    assert new_json['grades'][1] == {"title": "Math", "total": 100, "passing": 80, "obtained": 70}

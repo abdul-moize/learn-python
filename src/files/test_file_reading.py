@@ -40,10 +40,10 @@ def test_files_open():
     that the file is properly closed after its suite finishes, even if an exception is raised at
     some point. Using with is also much shorter than writing equivalent try-finally blocks:
     """
-    path = 'src/files/'
+    path = 'src/files'
 
     # Open files without using 'with' statement.
-    file = open(path + 'multi_line_file.txt', 'r')
+    file = open('{0}/multi_line_file.txt'.format(path), 'r')
 
     assert not file.closed
 
@@ -60,7 +60,16 @@ def test_files_open():
     assert file.closed
 
     # Open file using with.
-    with open(path + 'multi_line_file.txt', 'r') as file:
+    with open('{0}/multi_line_file.txt'.format(path), 'r') as file:
+        read_data = file.read()
+
+        assert read_data == (
+            'first line\n'
+            'second line\n'
+            'third line'
+        )
+
+    with open('{0}/multi_line_file.txt'.format(path), 'rb') as file:
         read_data = file.read()
 
         assert read_data == (
@@ -70,10 +79,10 @@ def test_files_open():
         )
 
     assert file.closed
-    f = open(path + 'new_file.txt', 'w')
+    f = open('{0}/new_file.txt'.format(path), 'w')
     f.write('this is a new file')
     f.close()
-    with open(path + 'new_file.txt', 'r') as f:
+    with open('{0}/new_file.txt'.format(path), 'r') as f:
         assert f.read() == 'this is a new file'
     # If you’re not using the with keyword, then you should call f.close() to close the file and
     # immediately free up any system resources used by it. If you don’t explicitly close a file,
