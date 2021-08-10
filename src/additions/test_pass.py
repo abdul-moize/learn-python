@@ -35,6 +35,19 @@ def test_pass_in_loop():
     #
     # while True:
     #   pass  # Busy-wait for keyboard interrupt (Ctrl+C)
+import math
+
+
+def test_pass_if():
+    def square_root(number):
+        if number < 0:
+            # handle error here
+            pass
+        else:
+            return math.sqrt(number)
+
+    assert square_root(16) == 4
+    assert square_root(-1) is None
 
 
 # pylint: disable=too-few-public-methods
