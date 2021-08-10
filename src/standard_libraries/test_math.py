@@ -17,6 +17,11 @@ def test_math():
     """
     assert math.cos(math.pi / 4) == 0.70710678118654757
     assert math.log(1024, 2) == 10.0
+    assert math.ceil(101.5) == 102
+    assert math.ceil(101.2) == 102
+    assert math.ceil(101.1) == 102
+    assert math.floor(101.9) == 101
+    assert math.floor(101.1) == 101
 
 
 def test_random():
@@ -42,6 +47,9 @@ def test_random():
     # Random integer chosen from range(6)
     random_integer = random.randrange(6)  # i.e. 4
     assert 0 <= random_integer <= 6
+    random_integer = int(random.randint(1, 10))
+    values = range(1, 11)
+    assert values.__contains__(random_integer)
 
 
 def test_statistics():
@@ -56,3 +64,5 @@ def test_statistics():
     assert statistics.mean(data) == 1.6071428571428572
     assert statistics.median(data) == 1.25
     assert statistics.variance(data) == 1.3720238095238095
+    assert statistics.mode(data) == 1.25
+    assert statistics.stdev(data) == 1.171334200612195
