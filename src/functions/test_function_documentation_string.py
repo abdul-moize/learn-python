@@ -23,6 +23,19 @@ def do_nothing():
     pass
 
 
+def factorial(n):
+    """
+    This function calculates factorial of a number n
+    where n! = n(n-1)(n-2)(n-3)...(3)(2)(1)
+    Param(n): positive integer/number
+    return: number
+    """
+    result = 1
+    for i in range(2, n+1):
+        result *= i
+    return result
+
+
 def test_function_documentation_string():
     """Test documentation string."""
 
@@ -41,7 +54,12 @@ def test_function_documentation_string():
     No, really, it doesn't do anything.
     """
     """
-    this is a documenation string
-    i can write anything here but the idea is to write something that will help
-    another person understand this function.
+    this is a docstring. its purpose is to explain the logic and working of the function as well as
+    define the paramters the function takes and what it returns
+    """
+    assert factorial.__doc__ == """
+    This function calculates factorial of a number n
+    where n! = n(n-1)(n-2)(n-3)...(3)(2)(1)
+    Param(n): positive integer/number
+    return: number
     """
