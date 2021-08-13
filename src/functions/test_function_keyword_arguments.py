@@ -117,3 +117,14 @@ def test_function_keyword_arguments():
         fourth_param_name='fourth named param',
         fifth_param_name='fifth named param',
     )
+
+    def greet(name="amk"):
+        return "hello, " + name
+
+    assert greet("amk") == greet()
+    assert greet(name="amk") == greet()
+
+    def test_function1(*tuple, **keywords):
+        return 'my name is ' + keywords['name'] + ' and my age is ' + str(keywords['age'])
+
+    assert test_function1('i1', 'i2', 'i3', name='amk', age=22) == 'my name is amk and my age is 22'

@@ -6,6 +6,46 @@ After defining the class attributes to a class, the class object can be created 
 object to a variable. The created object would have instance attributes associated with it.
 """
 
+import math
+# ATTRIBUTE REFERENCES use the standard syntax used for all attribute references in
+# Python: obj.name. Valid attribute names are all the names that were in the class’s namespace
+# when the class object was created. For class MyCounter the following references are valid
+# attribute references:
+
+
+class ComplexNumber:
+    """Example of the complex numbers class"""
+
+    real = 0
+    imaginary = 0
+
+    def get_real(self):
+        """Return real part of complex number."""
+        return self.real
+
+    def get_imaginary(self):
+        """Return imaginary part of complex number."""
+        return self.imaginary
+
+
+# The instantiation operation (“calling” a class object) creates an empty object. Many classes
+# like to create objects with instances customized to a specific initial state. Therefore a
+# class may define a special method named __init__(), like this:
+class ComplexNumberWithConstructor:
+    """Example of the class with constructor"""
+
+    def __init__(self, real_part, imaginary_part):
+        self.real = real_part
+        self.imaginary = imaginary_part
+
+    def get_real(self):
+        """Return real part of complex number."""
+        return self.real
+
+    def get_imaginary(self):
+        """Return imaginary part of complex number."""
+        return self.imaginary
+
 
 def test_class_objects():
     """Class Objects.
@@ -14,26 +54,6 @@ def test_class_objects():
     - attribute references
     - instantiation.
     """
-
-    # ATTRIBUTE REFERENCES use the standard syntax used for all attribute references in
-    # Python: obj.name. Valid attribute names are all the names that were in the class’s namespace
-    # when the class object was created. For class MyCounter the following references are valid
-    # attribute references:
-
-    class ComplexNumber:
-        """Example of the complex numbers class"""
-
-        real = 0
-        imaginary = 0
-
-        def get_real(self):
-            """Return real part of complex number."""
-            return self.real
-
-        def get_imaginary(self):
-            """Return imaginary part of complex number."""
-            return self.imaginary
-
     assert ComplexNumber.real == 0
 
     # __doc__ is also a valid attribute, returning the docstring belonging to the class
@@ -56,23 +76,43 @@ def test_class_objects():
     ComplexNumber.real = 10
     assert ComplexNumber.real == 10
 
-    # The instantiation operation (“calling” a class object) creates an empty object. Many classes
-    # like to create objects with instances customized to a specific initial state. Therefore a
-    # class may define a special method named __init__(), like this:
-
-    class ComplexNumberWithConstructor:
-        """Example of the class with constructor"""
-        def __init__(self, real_part, imaginary_part):
-            self.real = real_part
-            self.imaginary = imaginary_part
-
-        def get_real(self):
-            """Return real part of complex number."""
-            return self.real
-
-        def get_imaginary(self):
-            """Return imaginary part of complex number."""
-            return self.imaginary
-
     complex_number = ComplexNumberWithConstructor(3.0, -4.5)
     assert complex_number.real, complex_number.imaginary == (3.0, -4.5)
+
+    class Vector2:
+        x = 0
+        y = 0
+
+        def __init__(self, x=0, y=0):
+            if x != 0:
+                self.x = x
+            if y != 0:
+                self.y = y
+
+        def magnitude(self):
+            return math.sqrt(self.x ** 2 + self.y ** 2)
+
+        def get_x(self):
+            return self.x
+
+        def get_y(self):
+            return self.y
+
+        def set_x(self, x):
+            self.x = x
+
+        def set_y(self, y):
+            self.y = y
+
+    assert Vector2.x == 0
+    Vector2.x = 20
+    assert Vector2.x == 20
+    my_vector = Vector2()
+    assert my_vector.x == my_vector.get_x() == 20
+    my_vector.y = 25
+    assert my_vector.y == my_vector.get_y() == 25
+    my_vector.set_x(20)
+    assert my_vector.x == my_vector.get_x() == 20
+    my_vector = Vector2(2, 4)
+    assert my_vector.x == my_vector.get_x() == 2
+    assert my_vector.y == my_vector.get_y() == 4

@@ -10,6 +10,46 @@ It is possible to write programs that handle selected exceptions.
 """
 
 
+def handle_zero_error():
+    exception_has_been_handled = False
+    try:
+        result = 10 * (1 / 0)  # division by zero
+        # We should not get here at all.
+        assert result
+    except ZeroDivisionError:
+        # We should get here because of division by zero.
+        exception_has_been_handled = True
+
+    assert exception_has_been_handled
+
+
+def handle_name_error():
+    exception_has_been_handled = False
+    try:
+        # pylint: disable=undefined-variable
+        result = 4 + spam * 3  # name 'spam' is not defined
+        # We should not get here at all.
+        assert result
+    except NameError:
+        # We should get here because of division by zero.
+        exception_has_been_handled = True
+
+    assert exception_has_been_handled
+
+
+def handle_name_and_zero_error():
+    exception_has_been_handled = False
+    try:
+        result = 10 * (1 / 0)  # division by zero
+        # We should not get here at all.
+        assert result
+    except (ZeroDivisionError, NameError):
+        # We should get here because of division by zero.
+        exception_has_been_handled = True
+
+    assert exception_has_been_handled
+
+
 def test_handle_exceptions():
     """Handling of exceptions
 
@@ -30,45 +70,15 @@ def test_handle_exceptions():
     """
 
     # Let's simulate division by zero exception.
-    exception_has_been_handled = False
-    try:
-        result = 10 * (1 / 0)  # division by zero
-        # We should not get here at all.
-        assert result
-    except ZeroDivisionError:
-        # We should get here because of division by zero.
-        exception_has_been_handled = True
-
-    assert exception_has_been_handled
-
+    handle_zero_error()
     # Let's simulate undefined variable access exception.
-    exception_has_been_handled = False
-    try:
-        # pylint: disable=undefined-variable
-        result = 4 + spam * 3  # name 'spam' is not defined
-        # We should not get here at all.
-        assert result
-    except NameError:
-        # We should get here because of division by zero.
-        exception_has_been_handled = True
-
-    assert exception_has_been_handled
-
+    handle_name_error()
     # A try statement may have more than one except clause, to specify handlers for different
     # exceptions. At most one handler will be executed. Handlers only handle exceptions that occur
     # in the corresponding try clause, not in other handlers of the same try statement. An except
     # clause may name multiple exceptions as a parenthesized tuple, for example:
 
-    exception_has_been_handled = False
-    try:
-        result = 10 * (1 / 0)  # division by zero
-        # We should not get here at all.
-        assert result
-    except (ZeroDivisionError, NameError):
-        # We should get here because of division by zero.
-        exception_has_been_handled = True
-
-    assert exception_has_been_handled
+    handle_name_and_zero_error()
 
     # Exception handlers may be chained.
     exception_has_been_handled = False

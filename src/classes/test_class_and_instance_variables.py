@@ -30,6 +30,10 @@ def test_class_and_instance_variables():
 
     # Unique to buddy.
     assert buddy.name == 'Buddy'
+    Dog.kind = "unknown"
+    assert fido.kind == buddy.kind == 'unknown'
+    fido.kind = 'sheep'
+    assert buddy.kind == 'unknown'
 
     # Shared data can have possibly surprising effects with involving mutable objects such as lists
     # and dictionaries. For example, the tricks list in the following code should not be used as a

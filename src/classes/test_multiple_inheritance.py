@@ -66,3 +66,21 @@ def test_multiple_inheritance():
 
     assert calendar_clock.get_date() == '12/08/2018'
     assert calendar_clock.get_time() == '11:23 PM'
+
+    class Class1:
+        def m(self):
+            return "In Class1"
+
+    class Class2(Class1):
+        def m(self):
+            return "In Class2"
+
+    class Class3(Class1):
+        def m(self):
+            return "In Class3"
+
+    class Class4(Class2, Class3):
+        pass
+
+    obj = Class4()
+    assert obj.m() == 'In Class2'

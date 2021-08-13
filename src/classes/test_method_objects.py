@@ -36,13 +36,20 @@ def test_method_objects():
 
     # Usually, a method is called right after it is bound
     counter = MyCounter()
+    MyCounter.counter = 20
+    assert counter.counter == 20
+    counter.counter = 10
     assert counter.get_counter() == 10
+    assert MyCounter.get_counter(counter) == 10
+    assert MyCounter.get_counter(MyCounter) == 20
 
     # However, it is not necessary to call a method right away: counter.get_counter() is a method
     # object, and can be stored away and called at a later time. For example:
     get_counter = counter.get_counter
     assert get_counter() == 10
-
+    my_counter = MyCounter.get_counter
+    assert my_counter(counter) == 10
+    assert my_counter(MyCounter) == 20
     # What exactly happens when a method is called? You may have noticed that counter.get_counter()
     # was called without an argument above, even though the function definition for get_counter()
     # specified an argument (self). What happened to the argument? Surely Python raises an

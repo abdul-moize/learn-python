@@ -26,15 +26,16 @@ format for PYTHONPATH is OS-dependent but should mimic the PATH environment vari
 The resulting search path is accessible in the Python variable sys.path, which is obtained from a
 module named sys:
 
->>> import sys
->>> sys.path
+#>>> import sys
+#>>> sys.path
 
 @see: https://realpython.com/python-modules-packages/
 """
 
 # Users of the package can import individual modules from the package, for example.
-import sound_package.effects.echo
-
+from sound_package.formats.wav import wav_read
+from sound_package.formats.aif import aif_read
+import sound_package.formats
 # An alternative way of importing the submodule is:
 
 # pylint: disable=reimported
@@ -42,6 +43,7 @@ from sound_package.effects import echo
 
 # Yet another variation is to import the desired function or variable directly:
 from sound_package.effects.echo import echo_function
+
 
 # Note that when using from package import item, the item can be either a submodule (or subpackage)
 # of the package, or some other name defined in the package, like a function, class or variable.
@@ -59,3 +61,7 @@ def test_packages():
     assert sound_package.effects.echo.echo_function() == 'Do echo effect'
     assert echo.echo_function() == 'Do echo effect'
     assert echo_function() == 'Do echo effect'
+    assert sound_package.formats.wav.__doc__ == "WAV file support."
+    assert wav_read.__doc__ == 'WAV file reading function mock'
+    assert aif_read() == 'Read from AIF file'
+    assert wav_read() == 'Read from WAV file'

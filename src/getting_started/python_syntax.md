@@ -2,13 +2,17 @@
 
 **Python Syntax compared to other programming languages**
 
-- Python was designed to for readability, and has some similarities to the English language with influence from mathematics.
-- Python uses new lines to complete a command, as opposed to other programming languages which often use semicolons or parentheses.
-- Python relies on indentation, using whitespace, to define scope; such as the scope of loops, functions and classes. Other programming languages often use curly-brackets for this purpose.
+- Python was designed to for readability, and has some similarities to the English language with influence from
+  mathematics.
+- Python uses new lines to complete a command, as opposed to other programming languages which often use semicolons or
+  parentheses.
+- Python relies on indentation, using whitespace, to define scope; such as the scope of loops, functions and classes.
+  Other programming languages often use curly-brackets for this purpose.
 
 ## Python Indentations
 
-Where in other programming languages the indentation in code is for readability only, in Python the indentation is very important.
+Where in other programming languages the indentation in code is for readability only, in Python the indentation is very
+important.
 
 Python uses indentation to indicate a block of code.
 
